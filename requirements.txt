@@ -1,0 +1,12 @@
+python==3.13.0
+
+# Core libraries with pinned versions
+pandas==2.3.1
+numpy==2.3.1
+scikit-learn==1.7.1
+matplotlib==3.10.3
+seaborn==0.13.2
+jupyterlab==4.4.7
+notebook==7.4.5
+
+# Add more packages as needed for your project
