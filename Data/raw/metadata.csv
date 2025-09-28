@@ -1,0 +1,10 @@
+organisation,Telecom Regulatory Authority of India
+sectors,"Telecommunications"
+updated_frequency,Monthly
+granularity,"Month, Year"
+time_saved,6 hours
+source,"Telecom Regulatory Authority of India"
+source_link,"https://trai.gov.in/release-publication/reports/telecom-subscriptions-reports"
+time_period,"2009 to 2025"
+units,"value in absolute number"
+citation,"Telecom Regulatory Authority of India. Year-, Month-, Circle- and Service-provider-wise Number of Subscriptions to Wireline and Wireless Telecom Services in India [Data set]. Dataful. https://dataful.in/datasets/10/10"
