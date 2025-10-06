@@ -33,7 +33,7 @@ tests/               # Unit and integration tests
    ```
 2. **Set up your environment:**
    - Create a virtual environment (optional but recommended)
-   - Install required packages (see `requirements.txt` if available)
+   - Install required packages (see `requirements.txt`)
 
 3. **Explore the data:**
    - Use the notebooks in the `notebooks/` directory to explore and analyze the data.
