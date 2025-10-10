@@ -10,7 +10,7 @@ Data/
     interim/         # Intermediate data during processing
     raw/             # Original raw data files
         metadata.csv
-        year-month-circle-and-service-provider-wise-number-of-subscriptions-to-wireline-and-wireless-telecom-services-in-india.csv
+        telecom_market_data.csv
 docs/                # Project documentation
 models/              # Saved models and model artifacts
 notebooks/           # Jupyter notebooks for exploration and analysis
@@ -24,7 +24,7 @@ tests/               # Unit and integration tests
 
 ## Data Sources
 - **metadata.csv**: Metadata about the dataset.
-- **year-month-circle-and-service-provider-wise-number-of-subscriptions-to-wireline-and-wireless-telecom-services-in-india.csv**: Main dataset containing subscription information.
+- **telecom_market_data.csv**: Main dataset containing subscription information.
 
 ## Getting Started
 1. **Clone the repository:**
