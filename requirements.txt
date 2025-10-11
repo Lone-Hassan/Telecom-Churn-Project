@@ -9,5 +9,7 @@ jupyterlab==4.4.7
 notebook==7.4.5
 optuna==4.5.0
 category-encoders==2.8.1
+shap==0.48.0
+streamlit==1.50.0
 
 # Add more packages as needed for your project

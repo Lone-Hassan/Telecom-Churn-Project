@@ -6,6 +6,30 @@ import optuna
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import roc_auc_score
 
+def load_data(filepath):
+    """
+    Loads a CSV file into a pandas DataFrame.
+
+    Parameters:
+        filepath (str): Path to the CSV file.
+
+    Returns:
+        df_model (pd.DataFrame): Loaded DataFrame.
+        X (pd.DataFrame): Feature Matrix.
+        y (pd.Series): Target labels.
+    """
+    df_model = pd.read_csv(filepath,parse_dates=['date'])
+    df_model = df_model.sort_values('date')
+    
+    # Example cleaning and transformation steps
+    feature_cols = [col for col in df_model.columns if col not in [
+    'year', 'month', 'circle', 'service_provider', 'value', 'unit', 'notes',
+    'date', 'churn_binary', 'churn_severity'
+    ]]
+    X = df_model[feature_cols].fillna(0) # Simple missing value handling
+    y = df_model['churn_binary']
+    return df_model,X,y
+
 def prepare_modeling_data(filepath):
     """
     Loads, cleans, and preprocesses a churn dataset for modeling, applying time-based splitting,
@@ -36,25 +60,7 @@ def prepare_modeling_data(filepath):
         - Returns encoded feature names for traceability and interpretation.
     """
     
-    df_model = pd.read_csv(filepath,parse_dates=['date'])
-    df_model = df_model.sort_values('date')
-    
-    # Cleaning and transformation steps
-    feature_cols = [col for col in df_model.columns if col not in [
-    'year', 'month', 'circle', 'service_provider', 'value', 'unit', 'notes',
-    'date', 'churn_binary', 'churn_severity'
-    ]]
-    X = df_model[feature_cols].fillna(0) # Simple missing value handling
-    y = df_model['churn_binary']
-    
-    # Time-based split
-    split_date = df_model['date'].quantile(0.8)
-    train_mask = df_model['date'] < split_date
-    X_train = X[train_mask]
-    X_test = X[~train_mask]
-    y_train = y[train_mask]
-    y_test = y[~train_mask]
-    
+    X_train,X_test,y_train,y_test = pre_processing(filepath)
     # One-hot encoding and scaling
     ohe = OneHotEncoder(use_cat_names=True)
     X_train = ohe.fit_transform(X_train)
@@ -91,17 +97,8 @@ def pre_processing(filepath):
         - Designed for time-series aware modeling to prevent data leakage.
     """
 
-   
-    df_model = pd.read_csv(filepath,parse_dates=['date'])
-    df_model = df_model.sort_values('date')
     
-    # Example cleaning and transformation steps
-    feature_cols = [col for col in df_model.columns if col not in [
-    'year', 'month', 'circle', 'service_provider', 'value', 'unit', 'notes',
-    'date', 'churn_binary', 'churn_severity'
-    ]]
-    X = df_model[feature_cols].fillna(0) # Simple missing value handling
-    y = df_model['churn_binary']
+    df_model,X,y=load_data(filepath)
     # Time-based split
     split_date = df_model['date'].quantile(0.8)
     train_mask = df_model['date'] < split_date
