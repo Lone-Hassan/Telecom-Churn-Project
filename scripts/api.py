@@ -24,19 +24,22 @@ def predict_churn_endpoint():
         # Convert to DataFrame
         df_input = pd.DataFrame(data)
         # Make prediction
-        
-        probability = model.predict_proba(df_input)[:, 1][0]
-        prediction = model.predict(df_input)[0]
-        # Determine risk level
-        if probability > 0.7:
-            risk_level = 'High'
-        elif probability > 0.4:
-            risk_level = 'Medium'
-        else:
-            risk_level = 'Low'
+        risk_level = []
+        probability = model.predict_proba(df_input)[:, 1]
+        prediction = model.predict(df_input)
+        print(probability)
+        print(prediction)
+        for prob in probability:
+            # Determine risk level
+            if prob > 0.7:
+                risk_level.append('High')
+            elif prob > 0.4:
+                risk_level.append('Medium')
+            else:
+                risk_level.append('Low')
         response = {
-            'churn_probability': float(probability),
-            'churn_prediction': int(prediction),
+            'churn_probability': [float(x) for x in probability],
+            'churn_prediction': [int(x) for x in prediction],
             'risk_level': risk_level,
             'status': 'success'
             }
